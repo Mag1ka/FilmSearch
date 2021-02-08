@@ -1,0 +1,17 @@
+<resources>
+
+    <string name="app_name">Поиск фильмов</string>
+
+    <string name="disclaimer"> Картинки взяты с movieposters.com </string>
+
+    <string name="btn_menu1"> Меню </string>
+
+    <string name="btn_menu2"> Избраное </string>
+
+    <string name="btn_menu3"> Посмотреть позже </string>
+
+    <string name="btn_menu4"> Подборки </string>
+
+    <string name="btn_menu5"> Настройки </string>
+    <string name="menu_settings_title"> Верхнее меню</string>
+</resources>
