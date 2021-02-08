@@ -1,3 +1,5 @@
+package com.pochitaev.filmsearch
+
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.pochitaev.filmsearch.Film
