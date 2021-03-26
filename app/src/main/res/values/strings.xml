@@ -15,4 +15,12 @@
     <string name="btn_menu5"> Настройки </string>
     <string name="menu_settings_title"> Верхнее меню</string>
     <string name="share">Поделиться</string>
+
+    <string name="fragment">Будущее описание фильма</string>
+
+    <string name="page_title">Page title</string>
+
+
+
+
 </resources>
