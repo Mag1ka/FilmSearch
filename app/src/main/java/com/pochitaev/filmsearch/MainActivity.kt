@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
                     finish()
                 }
                 .setNegativeButton("Нет, я с вами на веки") { _, _ ->
+                    setContentView(R.layout.activity_main)
                     supportFragmentManager
                         .beginTransaction()
                         .add(R.id.fragment_placeholder, HomeFragment())
