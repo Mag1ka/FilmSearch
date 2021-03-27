@@ -16,4 +16,5 @@ class FilmsBase<List>(val title: String, val poster: Int, val description: Strin
           Film("The Wolf of Wall Street",R.drawable.wolf,"Based on the true story of Jordan Belfort, from his rise to a wealthy stock-broker living the high life to his fall involving crime, corruption and the federal government.", isInFavorites = false)
 
     }
+
 }
