@@ -6,7 +6,7 @@
 
     <string name="btn_menu1"> Меню </string>
 
-    <string name="btn_menu2"> Избраное </string>
+    <string name="menu_favorites_title"> Избраное </string>
 
     <string name="btn_menu3"> Посмотреть позже </string>
 
@@ -17,10 +17,8 @@
     <string name="share">Поделиться</string>
 
     <string name="fragment">Будущее описание фильма</string>
-
-    <string name="page_title">Page title</string>
-
-
+    <string name="menu_watch_later_title">Посмотреть позже</string>
+    <string name="menu_selections_title">Подборки</string>
 
 
 </resources>

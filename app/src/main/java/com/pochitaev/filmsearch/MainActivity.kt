@@ -66,8 +66,12 @@ class MainActivity : AppCompatActivity() {
 
             when (it.itemId) {
                 R.id.favorites -> {
-                    Toast.makeText(this, "Избранное", Toast.LENGTH_SHORT).show()
-                    true
+                    supportFragmentManager
+                            .beginTransaction()
+                            .replace(R.id.fragment_placeholder, FavoritesFragment())
+                            .addToBackStack(null)
+                            .commit()
+                        true
                 }
                 R.id.watch_later -> {
                     Toast.makeText(this, "Посмотреть похже", Toast.LENGTH_SHORT).show()
