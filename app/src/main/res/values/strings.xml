@@ -2,19 +2,9 @@
 
     <string name="app_name">Поиск фильмов</string>
 
-    <string name="disclaimer"> Картинки взяты с movieposters.com </string>
-
-    <string name="btn_menu1"> Меню </string>
-
     <string name="menu_favorites_title"> Избраное </string>
 
-    <string name="btn_menu3"> Посмотреть позже </string>
-
-    <string name="btn_menu4"> Подборки </string>
-
-    <string name="btn_menu5"> Настройки </string>
     <string name="menu_settings_title"> Верхнее меню</string>
-    <string name="share">Поделиться</string>
 
     <string name="fragment">Будущее описание фильма</string>
     <string name="menu_watch_later_title">Посмотреть позже</string>

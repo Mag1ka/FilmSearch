@@ -1,14 +1,28 @@
 package com.pochitaev.filmsearch
 
 import android.os.Bundle
+import android.transition.Scene
+import android.transition.Slide
+import android.transition.TransitionManager
+import android.transition.TransitionSet
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
+import androidx.core.view.isGone
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.merge_home_screen_content.*
+import java.util.*
 
 
+@Suppress("DEPRECATION")
 class HomeFragment : Fragment() {
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
 
@@ -26,19 +40,90 @@ class HomeFragment : Fragment() {
         Film("The Wolf of Wall Street",R.drawable.wolf,"Based on the true story of Jordan Belfort, from his rise to a wealthy stock-broker living the high life to his fall involving crime, corruption and the federal government.", isInFavorites = false))
 
 
+    var isLoading = false
+    val scrollListener = object: RecyclerView.OnScrollListener() {
+        @Override
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+            //какая позиция первого элемента
+            val firstVisibleItems = (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+
+
+             if (firstVisibleItems == 0) {
+                 search_view.isInvisible}
+                 else search_view.isVisible
+                    //ставим флаг, что мы попросили еще элементы
+
+                }
+            }
+
+
+
+
+
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val scene = Scene.getSceneForLayout(home_fragment_root, R.layout.merge_home_screen_content, requireContext())
+//Создаем анимацию выезда поля поиска сверху
+            val searchSlide = Slide(Gravity.TOP).addTarget(R.id.search_view)
+//Создаем анимацию выезда RV снизу
+            val recyclerSlide = Slide(Gravity.BOTTOM).addTarget(R.id.main_recycler)
+//Создаем экземпляр TransitionSet, который объединит все наши анимации
+            val customTransition = TransitionSet().apply {
+            //Устанавливаем время, за которое будет проходить анимация
+            duration = 750
+            //Добавляем сами анимации
+            addTransition(recyclerSlide)
+            addTransition(searchSlide) }
+
+
+
+            TransitionManager.go(scene, customTransition)
+
+
+
+        search_view.setOnClickListener {
+            search_view.isIconified = false
+        } //нажатие на поиск на всё поле
+        search_view.setOnQueryTextListener(object : SearchView.OnQueryTextListener,  // Поиск логика и изменения адаптера
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            //Этот метод отрабатывает при нажатии кнопки "поиск" на софт клавиатуре
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+            //Этот метод отрабатывает на каждое изменения текста
+            override fun onQueryTextChange(newText: String): Boolean {
+                //Если ввод пуст то вставляем в адаптер всю БД
+                if (newText.isEmpty()) {
+                    filmsAdapter.addItems(filmsList)
+                    return true
+                }
+                //Фильтруем список на поискк подходящих сочетаний
+                val result = filmsList.filter {
+                    //Чтобы все работало правильно, нужно и запрос, и имя фильма приводить к нижнему регистру
+                    it.title.toLowerCase(Locale.getDefault()).contains(newText.toLowerCase(Locale.getDefault()))
+                }
+                //Добавляем в адаптер
+                filmsAdapter.addItems(result)
+                return true
+            }
+        })
+
+
 
         //находим наш RV
         main_recycler.apply {
+            main_recycler.setOnScrollListener(scrollListener)
             filmsAdapter = FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener{
                 override fun click(film: Film) {
                     (requireActivity() as MainActivity).launchDetailsFragment(film)
@@ -51,9 +136,10 @@ class HomeFragment : Fragment() {
             //Применяем декоратор для отступов
             val decorator = TopSpacingItemDecoration(8)
             addItemDecoration(decorator)
+
         }
         //Кладем нашу БД в RV
         filmsAdapter.addItems(filmsList)
-    }
 
+    }
 }
