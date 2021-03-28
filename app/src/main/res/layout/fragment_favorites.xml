@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".FavoritesFragment"
     android:background="@drawable/background_favorites"
-    android:id="@+id/favorites_root"
+    android:id="@+id/favorites_fragment_root"
     >
 
     <androidx.recyclerview.widget.RecyclerView

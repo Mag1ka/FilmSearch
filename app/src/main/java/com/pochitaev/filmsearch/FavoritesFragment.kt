@@ -1,16 +1,12 @@
 package com.pochitaev.filmsearch
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_favorites.*
-import kotlinx.android.synthetic.main.fragment_home.*
-
-class FavoritesFragment : Fragment() {
-    private lateinit var filmsAdapter: FilmListRecyclerAdapter
 
     class FavoritesFragment : Fragment() {
         private lateinit var filmsAdapter: FilmListRecyclerAdapter
@@ -25,17 +21,17 @@ class FavoritesFragment : Fragment() {
 
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
-            AnimationHelper.performFragmentCircularRevealAnimation(favorites_root, requireActivity(), 2)
             //Получаем список при транзакции фрагмента
             val favoritesList: List<Film> = emptyList()
 
+            AnimationHelper.performFragmentCircularRevealAnimation(favorites_fragment_root, requireActivity(),2)
+
             favorites_recycler.apply {
-                filmsAdapter =
-                    FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener {
-                        override fun click(film: Film) {
-                            (requireActivity() as MainActivity).launchDetailsFragment(film)
-                        }
-                    })
+                filmsAdapter = FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener{
+                    override fun click(film: Film) {
+                        (requireActivity() as MainActivity).launchDetailsFragment(film)
+                    }
+                })
                 //Присваиваем адаптер
                 adapter = filmsAdapter
                 //Присвои layoutmanager
@@ -48,4 +44,3 @@ class FavoritesFragment : Fragment() {
             filmsAdapter.addItems(favoritesList)
         }
     }
-}
