@@ -14,12 +14,23 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
+    private fun checkFragmentExistence(tag: String): Fragment? =
+        supportFragmentManager.findFragmentByTag(tag)
+
+    private fun changeFragment(fragment: Fragment, tag: String) {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment_placeholder, fragment, tag)
+            .addToBackStack(null)
+            .commit()
+    }
+
 
     override fun onBackPressed() {
         val count = supportFragmentManager.backStackEntryCount
         super.onBackPressed()
         if (count == 1) {
-             AlertDialog.Builder(ContextThemeWrapper(this, R.style.MyDialog ))
+            AlertDialog.Builder(ContextThemeWrapper(this, R.style.MyDialog))
                 .setTitle("Вы уверены что хотите выйти из нашего приложения?")
                 .setIcon(R.drawable.exit)
                 .setPositiveButton("Да, ухожу как предатель") { _, _ ->
@@ -35,9 +46,8 @@ class MainActivity : AppCompatActivity() {
 
                 }
                 .show()
-            }
         }
-
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,31 +72,43 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+
+
         bottom_navigation.setOnNavigationItemSelectedListener {
 
             when (it.itemId) {
+                R.id.home -> {
+                    val tag = "home"
+                    val fragment = checkFragmentExistence(tag)
+                    //В первом параметре, если фрагмент не найден и метод вернул null, то с помощью
+                    //элвиса мы вызываем создание нового фрагмента
+                    changeFragment(fragment ?: HomeFragment(), tag)
+                    true
+                }
                 R.id.favorites -> {
-                    supportFragmentManager
-                            .beginTransaction()
-                            .replace(R.id.fragment_placeholder, FavoritesFragment())
-                            .addToBackStack(null)
-                            .commit()
-                        true
+                    val tag = "favorites"
+                    val fragment = checkFragmentExistence(tag)
+                    changeFragment(fragment ?: FavoritesFragment(), tag)
+                    true
                 }
                 R.id.watch_later -> {
-                    Toast.makeText(this, "Посмотреть похже", Toast.LENGTH_SHORT).show()
+                    val tag = "watch_later"
+                    val fragment = checkFragmentExistence(tag)
+                    changeFragment(fragment ?: WatchLaterFragment(), tag)
                     true
                 }
                 R.id.selections -> {
-                    Toast.makeText(this, "Подборки", Toast.LENGTH_SHORT).show()
+                    val tag = "selections"
+                    val fragment = checkFragmentExistence(tag)
+                    changeFragment(fragment ?: SelectionsFragment(), tag)
                     true
                 }
                 else -> false
             }
         }
 
-    }
 
+    }
     fun launchDetailsFragment(film: Film) {
         //Создаем "посылку"
         val bundle = Bundle()
@@ -105,6 +127,7 @@ class MainActivity : AppCompatActivity() {
             .commit()
 
     }
-
-
 }
+
+
+
