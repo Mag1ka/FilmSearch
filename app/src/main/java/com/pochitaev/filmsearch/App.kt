@@ -1,31 +1,27 @@
 package com.pochitaev.filmsearch
 
 import android.app.Application
-import android.content.res.Configuration
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
+import com.pochitaev.filmsearch.data.MainRepository
+import com.pochitaev.filmsearch.domain.Interactor
 
 class App : Application() {
+    lateinit var repo: MainRepository
+    lateinit var interactor: Interactor
+
     override fun onCreate() {
         super.onCreate()
+        //Инициализируем экземпляр App, через который будем получать доступ к остальным переменным
+        instance = this
+        //Инициализируем репозиторий
+        repo = MainRepository()
+        //Инициализируем интерактор
+        interactor = Interactor(repo)
     }
-    override fun onConfigurationChanged ( newConfig : Configuration) {
-        super.onConfigurationChanged(newConfig)
-    }
-    override fun onLowMemory() {
-        super.onLowMemory()
-    }
-    class LifeCycleListener : LifecycleObserver {
-        @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-        fun start() {
 
-
-        }
-
-        @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-        fun stop() {
-
-        }
+    companion object {
+        //Здесь статически хранится ссылка на экземпляр App
+        lateinit var instance: App
+            //Приватный сеттер, чтобы нельзя было в эту переменную присвоить что-либо другое
+            private set
     }
 }

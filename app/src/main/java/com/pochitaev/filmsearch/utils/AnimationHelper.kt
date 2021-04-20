@@ -1,4 +1,4 @@
-package com.pochitaev.filmsearch
+package com.pochitaev.filmsearch.utils
 
 import android.app.Activity
 import android.view.View

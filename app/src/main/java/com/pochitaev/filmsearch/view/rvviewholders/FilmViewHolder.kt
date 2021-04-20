@@ -1,8 +1,9 @@
-package com.pochitaev.filmsearch
+package com.pochitaev.filmsearch.view.rvviewholders
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.pochitaev.filmsearch.Film
 import kotlinx.android.synthetic.main.film_item.view.*
 
 //В конструктор класс передается layout, который мы создали(film_item.xml)

@@ -1,8 +1,11 @@
-package com.pochitaev.filmsearch
+package com.pochitaev.filmsearch.view.rv_adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.pochitaev.filmsearch.Film
+import com.pochitaev.filmsearch.R
+import com.pochitaev.filmsearch.view.rvviewholders.FilmViewHolder
 import kotlinx.android.synthetic.main.film_item.view.*
 
 

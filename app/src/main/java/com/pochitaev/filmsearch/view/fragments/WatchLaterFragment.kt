@@ -1,10 +1,11 @@
-package com.pochitaev.filmsearch
+package com.pochitaev.filmsearch.view.fragments
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.pochitaev.filmsearch.databinding.FragmentWatchLaterBinding
+import com.pochitaev.filmsearch.utils.AnimationHelper
 import kotlinx.android.synthetic.main.fragment_watch_later.*
 
 class WatchLaterFragment : Fragment() {

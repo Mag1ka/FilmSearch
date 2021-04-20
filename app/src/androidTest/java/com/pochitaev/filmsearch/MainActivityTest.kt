@@ -11,6 +11,8 @@ import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.pochitaev.filmsearch.view.MainActivity
+import com.pochitaev.filmsearch.view.rvviewholders.FilmViewHolder
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.allOf
 import org.junit.Rule

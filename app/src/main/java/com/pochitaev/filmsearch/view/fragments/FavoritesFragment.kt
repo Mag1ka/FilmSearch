@@ -1,4 +1,4 @@
-package com.pochitaev.filmsearch
+package com.pochitaev.filmsearch.view.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.pochitaev.filmsearch.Film
+import com.pochitaev.filmsearch.view.MainActivity
+import com.pochitaev.filmsearch.view.rv_adapters.TopSpacingItemDecoration
 import com.pochitaev.filmsearch.databinding.FragmentFavoritesBinding
+import com.pochitaev.filmsearch.utils.AnimationHelper
+import com.pochitaev.filmsearch.view.rv_adapters.FilmListRecyclerAdapter
 import kotlinx.android.synthetic.main.fragment_favorites.*
 
     class FavoritesFragment : Fragment() {

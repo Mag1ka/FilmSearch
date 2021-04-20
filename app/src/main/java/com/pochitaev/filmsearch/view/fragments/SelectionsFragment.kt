@@ -1,4 +1,4 @@
-package com.pochitaev.filmsearch
+package com.pochitaev.filmsearch.view.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.pochitaev.filmsearch.databinding.FragmentSelectionsBinding
+import com.pochitaev.filmsearch.utils.AnimationHelper
 import kotlinx.android.synthetic.main.fragment_selections.*
 
 class SelectionsFragment : Fragment() {

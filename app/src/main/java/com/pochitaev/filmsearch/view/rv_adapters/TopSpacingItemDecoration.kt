@@ -1,4 +1,4 @@
-package com.pochitaev.filmsearch
+package com.pochitaev.filmsearch.view.rv_adapters
 import android.content.res.Resources
 import android.graphics.Rect
 import android.view.View
