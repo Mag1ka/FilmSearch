@@ -144,4 +144,6 @@ class RatingDonutView @JvmOverloads constructor(context: Context, attributeSet: 
         //вызываем перерисовку View
         invalidate()
     }
+    
+
 }
