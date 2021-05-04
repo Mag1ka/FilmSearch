@@ -10,6 +10,7 @@ import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pochitaev.filmsearch.databinding.FragmentHomeBinding
+import com.pochitaev.filmsearch.domain.Film
 import com.pochitaev.filmsearch.utils.AnimationHelper
 import com.pochitaev.filmsearch.view.MainActivity
 import com.pochitaev.filmsearch.view.rv_adapters.FilmListRecyclerAdapter
