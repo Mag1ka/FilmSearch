@@ -5,22 +5,29 @@ import androidx.lifecycle.ViewModel
 import com.pochitaev.filmsearch.App
 import com.pochitaev.filmsearch.domain.Film
 import com.pochitaev.filmsearch.domain.Interactor
+import javax.inject.Inject
 
 
 class HomeFragmentViewModel : ViewModel() {
     val filmsListLiveData: MutableLiveData<List<Film>> = MutableLiveData()
 
     //Инициализируем интерактор
-    private var interactor: Interactor = App.instance.interactor
+    @Inject
+    lateinit var interactor: Interactor
 
     init {
+        App.instance.dagger.inject(this)
+        getFilms()
+    }
+
+    fun getFilms() {
         interactor.getFilmsFromApi(1, object : ApiCallback {
             override fun onSuccess(films: List<Film>) {
                 filmsListLiveData.postValue(films)
-
             }
 
             override fun onFailure() {
+                filmsListLiveData.postValue(interactor.getFilmsFromDB())
             }
         })
     }
@@ -28,5 +35,7 @@ class HomeFragmentViewModel : ViewModel() {
     interface ApiCallback {
         fun onSuccess(films: List<Film>)
         fun onFailure()
+
     }
-}
+
+    }

@@ -7,14 +7,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.fragment.app.Fragment
-import com.pochitaev.filmsearch.HomeFragment
 import com.pochitaev.filmsearch.R
 import com.pochitaev.filmsearch.databinding.ActivityMainBinding
 import com.pochitaev.filmsearch.domain.Film
-import com.pochitaev.filmsearch.view.fragments.DetailsFragment
-import com.pochitaev.filmsearch.view.fragments.FavoritesFragment
-import com.pochitaev.filmsearch.view.fragments.SelectionsFragment
-import com.pochitaev.filmsearch.view.fragments.WatchLaterFragment
+import com.pochitaev.filmsearch.view.fragments.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -54,6 +50,8 @@ class MainActivity : AppCompatActivity() {
             .add(R.id.fragment_placeholder, HomeFragment())
             .addToBackStack(null)
             .commit()
+
+
 
 
 
@@ -101,6 +99,12 @@ class MainActivity : AppCompatActivity() {
                     val tag = "selections"
                     val fragment = checkFragmentExistence(tag)
                     changeFragment( fragment?: SelectionsFragment(), tag)
+                    true
+                }
+                R.id.settings -> {
+                    val tag = "settings"
+                    val fragment = checkFragmentExistence(tag)
+                    changeFragment( fragment?: SettingsFragment(), tag)
                     true
                 }
                 else -> false
