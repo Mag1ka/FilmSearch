@@ -1,7 +1,7 @@
 package com.pochitaev.filmsearch.utils
 
 import com.pochitaev.filmsearch.data.entity.TmdbFilm
-import com.pochitaev.filmsearch.domain.Film
+import com.pochitaev.filmsearch.data.entity.Film
 
 
 object Converter {

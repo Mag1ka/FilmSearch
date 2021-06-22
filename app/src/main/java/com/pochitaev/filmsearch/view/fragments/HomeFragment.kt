@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pochitaev.filmsearch.databinding.FragmentHomeBinding
-import com.pochitaev.filmsearch.domain.Film
+import com.pochitaev.filmsearch.data.entity.Film
 import com.pochitaev.filmsearch.utils.AnimationHelper
 import com.pochitaev.filmsearch.view.MainActivity
 import com.pochitaev.filmsearch.view.rv_adapters.FilmListRecyclerAdapter

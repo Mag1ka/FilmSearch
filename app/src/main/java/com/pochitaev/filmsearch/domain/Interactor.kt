@@ -4,6 +4,7 @@ import com.pochitaev.filmsearch.data.API
 import com.pochitaev.filmsearch.data.MainRepository
 import com.pochitaev.filmsearch.data.PreferenceProvider
 import com.pochitaev.filmsearch.data.TmdbApi
+import com.pochitaev.filmsearch.data.entity.Film
 import com.pochitaev.filmsearch.data.entity.TmdbResults
 import com.pochitaev.filmsearch.utils.Converter
 import com.pochitaev.filmsearch.viewmodel.HomeFragmentViewModel

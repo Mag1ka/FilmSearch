@@ -4,7 +4,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.pochitaev.filmsearch.data.ApiConstants
-import com.pochitaev.filmsearch.domain.Film
+import com.pochitaev.filmsearch.data.entity.Film
 import kotlinx.android.synthetic.main.film_item.view.*
 
 //В конструктор класс передается layout, который мы создали(film_item.xml)

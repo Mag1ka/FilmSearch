@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.pochitaev.filmsearch.R
 import com.pochitaev.filmsearch.data.ApiConstants
 import com.pochitaev.filmsearch.databinding.FragmentDetailsBinding
-import com.pochitaev.filmsearch.domain.Film
+import com.pochitaev.filmsearch.data.entity.Film
 
 class DetailsFragment : Fragment() {
     private lateinit var film: Film

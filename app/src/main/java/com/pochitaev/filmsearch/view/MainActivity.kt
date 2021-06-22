@@ -9,7 +9,7 @@ import androidx.appcompat.view.ContextThemeWrapper
 import androidx.fragment.app.Fragment
 import com.pochitaev.filmsearch.R
 import com.pochitaev.filmsearch.databinding.ActivityMainBinding
-import com.pochitaev.filmsearch.domain.Film
+import com.pochitaev.filmsearch.data.entity.Film
 import com.pochitaev.filmsearch.view.fragments.*
 
 

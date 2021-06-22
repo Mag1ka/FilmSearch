@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.pochitaev.filmsearch.domain.Film
+import com.pochitaev.filmsearch.data.entity.Film
 import com.pochitaev.filmsearch.view.MainActivity
 import com.pochitaev.filmsearch.view.rv_adapters.TopSpacingItemDecoration
 import com.pochitaev.filmsearch.databinding.FragmentFavoritesBinding
