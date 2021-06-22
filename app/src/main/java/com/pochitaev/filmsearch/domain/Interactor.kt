@@ -1,5 +1,6 @@
 package com.pochitaev.filmsearch.domain
 
+import androidx.lifecycle.LiveData
 import com.pochitaev.filmsearch.data.API
 import com.pochitaev.filmsearch.data.MainRepository
 import com.pochitaev.filmsearch.data.PreferenceProvider
@@ -17,14 +18,12 @@ class Interactor(private val repo: MainRepository, private val retrofitService: 
         //Метод getDefaultCategoryFromPreferences() будет нам получать при каждом запросе нужный нам список фильмов
         retrofitService.getFilms(getDefaultCategoryFromPreferences(), API.KEY, "ru-RU", page).enqueue(object : Callback<TmdbResults> {
             override fun onResponse(call: Call<TmdbResults>, response: Response<TmdbResults>) {
-               //При успехе мы вызываем метод, передаем onSuccess и в этот коллбэк список фильмов
-                    val list = Converter.convertApiListToDTOList(response.body()?.tmdbFilms)
-                    //Кладем фильмы в бд
-                    list.forEach {
-                        repo.putToDb(film = it)
-                    }
-                    callback.onSuccess(list)
-                }
+                //При успехе мы вызываем метод передаем onSuccess и в этот коллбэк список фильмов
+                val list = Converter.convertApiListToDTOList(response.body()?.tmdbFilms)
+                //Кладем фильмы в бд
+                repo.putToDb(list)
+                callback.onSuccess()
+            }
 
             override fun onFailure(call: Call<TmdbResults>, t: Throwable) {
                 //В случае провала вызываем другой метод коллбека
@@ -36,7 +35,8 @@ class Interactor(private val repo: MainRepository, private val retrofitService: 
     fun saveDefaultCategoryToPreferences(category: String) {
         preferences.saveDefaultCategory(category)
     }
-    fun getFilmsFromDB(): List<Film> = repo.getAllFromDB()
     //Метод для получения настроек
     fun getDefaultCategoryFromPreferences() = preferences.geDefaultCategory()
+
+    fun getFilmsFromDB(): LiveData<List<Film>> = repo.getAllFromDB()
 }

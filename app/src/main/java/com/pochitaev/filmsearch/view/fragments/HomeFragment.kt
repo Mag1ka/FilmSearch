@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.pochitaev.filmsearch.databinding.FragmentHomeBinding
 import com.pochitaev.filmsearch.data.entity.Film
+import com.pochitaev.filmsearch.databinding.FragmentHomeBinding
 import com.pochitaev.filmsearch.utils.AnimationHelper
 import com.pochitaev.filmsearch.view.MainActivity
 import com.pochitaev.filmsearch.view.rv_adapters.FilmListRecyclerAdapter
@@ -40,7 +42,6 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         retainInstance = true
-
     }
 
     override fun onCreateView(
@@ -64,6 +65,10 @@ class HomeFragment : Fragment() {
         viewModel.filmsListLiveData.observe(viewLifecycleOwner, Observer<List<Film>> {
             filmsDataBase = it
             filmsAdapter.addItems(it)
+        })
+        viewModel.showProgressBar.observe(viewLifecycleOwner, Observer<Boolean> {
+            binding.progressBar.isVisible = it
+            binding.mainRecycler.isInvisible = it
         })
 
     }
