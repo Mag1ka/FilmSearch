@@ -1,11 +1,7 @@
 <resources>
-
     <string name="app_name">Поиск фильмов</string>
-
     <string name="menu_favorites_title"> Избраное </string>
-
     <string name="menu_settings_title"> Верхнее меню</string>
-
     <string name="fragment">Будущее описание фильма</string>
     <string name="menu_watch_later_title">Посмотреть позже</string>
     <string name="menu_selections_title">Подборки</string>
@@ -17,6 +13,10 @@
     <string name="radio_button_upcoming">Ожидаемые фильмы</string>
     <string name="radio_button_playing">Сейчас смотрят</string>
     <string name="radio_group_header">Подборка на главном экране:</string>
+
+    <string name="permission_storage">Нет разрешения. Пожалуйста, предоставьте разрешение</string>
+    <string name="downloaded_to_gallery">"Сохранено в галерею"</string>
+    <string name="open">В галерею</string>
 
 
 
