@@ -5,10 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
-import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pochitaev.filmsearch.data.entity.Film
@@ -19,16 +17,19 @@ import com.pochitaev.filmsearch.view.rv_adapters.FilmListRecyclerAdapter
 import com.pochitaev.filmsearch.view.rv_adapters.TopSpacingItemDecoration
 import com.pochitaev.filmsearch.viewmodel.HomeFragmentViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.collect
 import java.util.*
 
-
 class HomeFragment : Fragment() {
+    private lateinit var scope: CoroutineScope
     private val viewModel by lazy {
         ViewModelProvider.NewInstanceFactory().create(HomeFragmentViewModel::class.java)
     }
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
     private lateinit var binding: FragmentHomeBinding
     private var filmsDataBase = listOf<Film>()
+
         //Используем backing field
         set(value) {
             //Если придет такое же значение то мы выходим из метода
@@ -54,22 +55,35 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         AnimationHelper.performFragmentCircularRevealAnimation(home_fragment_root, requireActivity(), 1)
+
+        scope = CoroutineScope(Dispatchers.IO).also { scope ->
+            scope.launch {
+                viewModel.filmsListData.collect {
+                    withContext(Dispatchers.Main) {
+                        filmsAdapter.addItems(it)
+                        filmsDataBase = it
+                    }
+                }
+            }
+        }
 
         initSearchView()
         initPullToRefresh()
         //находим наш RV
         initRecyckler()
         //Кладем нашу БД в RV
-        viewModel.filmsListLiveData.observe(viewLifecycleOwner, Observer<List<Film>> {
-            filmsDataBase = it
-            filmsAdapter.addItems(it)
-        })
-        viewModel.showProgressBar.observe(viewLifecycleOwner, Observer<Boolean> {
-            binding.progressBar.isVisible = it
-            binding.mainRecycler.isInvisible = it
-        })
+        scope.launch {
+
+            for (element in viewModel.showProgressBar) {
+                launch(Dispatchers.Main) {
+                    binding.progressBar.isVisible = element
+
+                }
+            }
+
+
+        }
 
     }
 
@@ -135,5 +149,10 @@ class HomeFragment : Fragment() {
             addItemDecoration(decorator)
         }
     }
+    override fun onStop() {
+        super.onStop()
+        scope.cancel()
+    }
+
 
 }
