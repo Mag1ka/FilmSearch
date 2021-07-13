@@ -4,19 +4,19 @@ import androidx.lifecycle.ViewModel
 import com.pochitaev.filmsearch.App
 import com.pochitaev.filmsearch.data.entity.Film
 import com.pochitaev.filmsearch.domain.Interactor
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.Flow
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.subjects.BehaviorSubject
 import javax.inject.Inject
 
 
 class HomeFragmentViewModel : ViewModel() {
-    val showProgressBar: Channel<Boolean>
+    val showProgressBar: BehaviorSubject<Boolean>
 
     //Инициализируем интерактор
     @Inject
 
     lateinit var interactor: Interactor
-    val filmsListData: Flow<List<Film>>
+    val filmsListData: Observable<List<Film>>
 
     init {
         App.instance.dagger.inject(this)

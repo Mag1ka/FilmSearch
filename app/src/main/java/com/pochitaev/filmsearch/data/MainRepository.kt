@@ -2,7 +2,7 @@ package com.pochitaev.filmsearch.data
 
 import com.pochitaev.filmsearch.data.dao.FilmDao
 import com.pochitaev.filmsearch.data.entity.Film
-import kotlinx.coroutines.flow.Flow
+import io.reactivex.rxjava3.core.Observable
 import java.util.concurrent.Executors
 
 class MainRepository(private val filmDao: FilmDao) {
@@ -14,5 +14,5 @@ class MainRepository(private val filmDao: FilmDao) {
             }
         }
 
-    fun getAllFromDB(): Flow<List<Film>> = filmDao.getCachedFilms()
+    fun getAllFromDB(): Observable<List<Film>> = filmDao.getCachedFilms()
     }
