@@ -1,9 +1,10 @@
 package com.pochitaev.filmsearch.di.modules
 
-import Interactor
 import android.content.Context
 import com.pochitaev.filmsearch.data.MainRepository
 import com.pochitaev.filmsearch.data.PreferenceProvider
+import com.pochitaev.filmsearch.domain.Interactor
+import com.pochitaev.remote_module.TmdbApi
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -22,5 +23,5 @@ class DomainModule(val context: Context) {
 
     @Singleton
     @Provides
-    fun provideInteractor(repository: MainRepository, tmdbApi: com.pochitaev.remote_module.TmdbApi, preferenceProvider: PreferenceProvider) = Interactor(repo = repository, retrofitService = tmdbApi, preferences = preferenceProvider)
+    fun provideInteractor(repository: MainRepository, tmdbApi: TmdbApi, preferenceProvider: PreferenceProvider) = Interactor(repo = repository, retrofitService = tmdbApi, preferences = preferenceProvider)
 }
