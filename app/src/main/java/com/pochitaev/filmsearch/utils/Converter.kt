@@ -1,11 +1,10 @@
 package com.pochitaev.filmsearch.utils
 
-import com.pochitaev.filmsearch.data.entity.TmdbFilm
 import com.pochitaev.filmsearch.data.entity.Film
 
 
 object Converter {
-    fun convertApiListToDTOList(list: List<TmdbFilm>?): List<Film> {
+    fun convertApiListToDTOList(list: List<com.pochitaev.remote_module.entity.TmdbFilm>?): List<Film> {
         val result = mutableListOf<Film>()
         list?.forEach {
             result.add(Film(

@@ -1,4 +1,4 @@
-package com.pochitaev.filmsearch.data
+package com.pochitaev.remote_module.entity
 
 object ApiConstants {
     const val BASE_URL = "https://api.themoviedb.org/"

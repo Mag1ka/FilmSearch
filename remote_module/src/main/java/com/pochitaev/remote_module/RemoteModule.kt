@@ -1,9 +1,6 @@
-package com.pochitaev.filmsearch.di.modules
+package com.pochitaev.remote_module
 
-
-import com.pochitaev.filmsearch.BuildConfig
-import com.pochitaev.filmsearch.data.ApiConstants
-import com.pochitaev.filmsearch.data.TmdbApi
+import com.pochitaev.remote_module.entity.ApiConstants
 import dagger.Module
 import dagger.Provides
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
@@ -37,6 +34,7 @@ class RemoteModule {
         .baseUrl(ApiConstants.BASE_URL)
         //Добавляем конвертер
         .addConverterFactory(GsonConverterFactory.create())
+        //Добавляем поддержку RxJava
         .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
         //Добавляем кастомный клиент
         .client(okHttpClient)
