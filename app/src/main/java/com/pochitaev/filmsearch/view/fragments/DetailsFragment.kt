@@ -21,6 +21,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.pochitaev.filmsearch.R
 import com.pochitaev.filmsearch.data.entity.Film
 import com.pochitaev.filmsearch.databinding.FragmentDetailsBinding
+import com.pochitaev.filmsearch.view.notifications.NotificationHelper
 import com.pochitaev.filmsearch.viewmodel.DetailsFragmentViewModel
 import kotlinx.coroutines.*
 
@@ -51,7 +52,9 @@ class DetailsFragment : Fragment() {
                 film.isInFavorites = false
             }
         }
-
+        binding.detailsFabWatchLater.setOnClickListener {
+            NotificationHelper.createNotification(requireContext(), film)
+        }
         binding.detailsFabShare.setOnClickListener {
             //Создаем интент
             val intent = Intent()
