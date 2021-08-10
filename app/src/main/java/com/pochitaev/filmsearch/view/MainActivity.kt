@@ -1,6 +1,9 @@
 package com.pochitaev.filmsearch.view
 
 
+import android.content.BroadcastReceiver
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.view.ContextThemeWrapper
 import androidx.appcompat.app.AlertDialog
@@ -9,11 +12,13 @@ import androidx.fragment.app.Fragment
 import com.pochitaev.filmsearch.R
 import com.pochitaev.filmsearch.data.entity.Film
 import com.pochitaev.filmsearch.databinding.ActivityMainBinding
+import com.pochitaev.filmsearch.receivers.ConnectionChecker
 import com.pochitaev.filmsearch.view.fragments.*
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var receiver: BroadcastReceiver
     override fun onBackPressed() {
         val count = supportFragmentManager.backStackEntryCount
         super.onBackPressed()
@@ -42,6 +47,15 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         //Передаем его в метод
         setContentView(binding.root)
+
+        receiver = ConnectionChecker()
+        val filters = IntentFilter().apply {
+            addAction(Intent.ACTION_POWER_CONNECTED)
+            addAction(Intent.ACTION_BATTERY_LOW)
+        }
+        registerReceiver(receiver, filters)
+
+
 
         initNavigation()
         //Зупускаем фрагмент при старте
@@ -120,6 +134,10 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.fragment_placeholder, fragment, tag)
             .addToBackStack(null)
             .commit()
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(receiver)
     }
 }
 
