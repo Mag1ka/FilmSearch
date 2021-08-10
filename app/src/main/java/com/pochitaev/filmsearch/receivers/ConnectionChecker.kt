@@ -13,17 +13,9 @@ class ConnectionChecker : BroadcastReceiver() {
         //Проверяем, какой пришел action
         when (intent.action) {
             //Если пришел низкий заряд батарее
-            Intent.ACTION_BATTERY_LOW -> {
-                Toast.makeText(context, "Батарея разряжена", Toast.LENGTH_SHORT).show()
-
-
-            }
+            Intent.ACTION_BATTERY_LOW -> Toast.makeText(context, "Батарея разряжена", Toast.LENGTH_SHORT).show()
             //Если пришло подключение к зарядке
-            Intent.ACTION_POWER_CONNECTED -> {
-                Toast.makeText(context, "Зарядка подключена", Toast.LENGTH_SHORT).show()
-
-
-            }
+            Intent.ACTION_POWER_CONNECTED -> Toast.makeText(context, "Зарядка подключена", Toast.LENGTH_SHORT).show()
         }
 
     }
