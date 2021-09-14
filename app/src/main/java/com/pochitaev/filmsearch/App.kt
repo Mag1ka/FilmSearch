@@ -14,6 +14,7 @@ import com.pochitaev.remote_module.DaggerRemoteComponent
 
 class App : Application() {
     lateinit var dagger: AppComponent
+    var isPromoShown = false
     override fun onCreate() {
         super.onCreate()
         instance = this
